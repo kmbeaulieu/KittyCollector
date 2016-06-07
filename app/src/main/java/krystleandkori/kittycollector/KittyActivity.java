@@ -103,18 +103,18 @@ public class KittyActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
     private boolean gotCollar(){
-         final double LUCKCHANCE = currentKitty.mCat.getLuck();
+       /*  final double LUCKCHANCE = currentKitty.mCat.getLuck();
         Random r = new Random(10);
-        double val = r.nextInt();
+        double val = r.nextInt();*/
         //TODO make this a real function
         return true;
 
     }
     public void saveStatsAndAddnewCat(){
         //I feel like this is a really weird way to do this. Should I have generate Kitty in another class?
-        if (gotCollar()){
+      //  if (gotCollar()){
             currentUser.collarsCollected++;
-        }
+        //}
         //reset status
         loveBar.setProgress(0);
         //make a new kitty
@@ -165,8 +165,8 @@ public class KittyActivity extends AppCompatActivity
 
         if (id == R.id.nav_profile) {
             ProfileFragment pf = new ProfileFragment();
-            FragmentManager fm = getSupportFragmentManager();
-            fm.beginTransaction().replace(R.id.drawer_layout, pf).commit();
+            android.support.v4.app.FragmentTransaction fragmentTransaction= getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, pf).commit();
         } else if (id == R.id.nav_share) {
             // do a thing
             Toast.makeText(KittyActivity.this,"Clicked Share",Toast.LENGTH_SHORT).show();
