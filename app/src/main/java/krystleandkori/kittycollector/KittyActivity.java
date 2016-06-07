@@ -8,6 +8,8 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentManager;
+import android.view.MenuInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -33,6 +35,7 @@ public class KittyActivity extends AppCompatActivity
     Button upgrade1;
     User currentUser;
     Button upgrade2;
+    ProgressBar loveBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +53,7 @@ public class KittyActivity extends AppCompatActivity
         final TextView kittyName = (TextView) findViewById(R.id.kitty_name);
         kittyName.setText(currentKitty.getmName());
 //        kittyButton.setBackground(R.drawable.shittykitty);
-        final ProgressBar loveBar = (ProgressBar) findViewById(R.id.love_bar);
+        loveBar = (ProgressBar) findViewById(R.id.love_bar);
         //get the max from the cat's love value
         loveBar.setMax(currentKitty.mCat.getLove());
 
@@ -60,10 +63,9 @@ public class KittyActivity extends AppCompatActivity
                     count++;
                     clickCounterView.setText(count.toString());
                     loveBar.setProgress(count);
-                    if(count == 100){
+                    if(count == loveBar.getMax()){
                         loveBar.getProgressDrawable().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
-//                        loveBar.setProgressBackgroundTintList(@android:color/colorPrimary);
-                        Toast.makeText(KittyActivity.this,"You caught a cat!",Toast.LENGTH_SHORT).show();
+                       Toast.makeText(KittyActivity.this,"You caught a cat!",Toast.LENGTH_SHORT).show();
                         saveStatsAndAddnewCat();
 
                         //TODO make a user that has stored info
@@ -73,8 +75,23 @@ public class KittyActivity extends AppCompatActivity
         }
 
         upgrade1 = (Button) findViewById(R.id.upgrade_button_1);
+        upgrade1.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                if (currentUser.collarsCollected<5){
+                    Toast.makeText(KittyActivity.this, "Not enough collars", Toast.LENGTH_SHORT).show();
+                }else{
+                    //TODO have a non-hardcoded value for 5 and .25
+                    currentUser.collarsCollected = currentUser.collarsCollected - 5;
+                    currentUser.clickStr = currentUser.clickStr + .25;
+                }
+            }
+        });
         upgrade2 = (Button) findViewById(R.id.upgrade_button_2);
-
+        upgrade2.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                Toast.makeText(KittyActivity.this, "Clicked the upgrade button.", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -89,17 +106,21 @@ public class KittyActivity extends AppCompatActivity
          final double LUCKCHANCE = currentKitty.mCat.getLuck();
         Random r = new Random(10);
         double val = r.nextInt();
+        //TODO make this a real function
         return true;
 
     }
     public void saveStatsAndAddnewCat(){
         //I feel like this is a really weird way to do this. Should I have generate Kitty in another class?
         if (gotCollar()){
-
+            currentUser.collarsCollected++;
         }
-
-
+        //reset status
+        loveBar.setProgress(0);
+        //make a new kitty
         currentKitty = currentKitty.generateKitty();
+        //set max for the progress bar
+        loveBar.setMax(currentKitty.mCat.getLove());
     }
 
 
@@ -141,9 +162,11 @@ public class KittyActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+
         if (id == R.id.nav_profile) {
-            // Handle the camera action
-            Toast.makeText(KittyActivity.this,"Clicked Profile",Toast.LENGTH_SHORT).show();
+            ProfileFragment pf = new ProfileFragment();
+            FragmentManager fm = getSupportFragmentManager();
+            fm.beginTransaction().replace(R.id.drawer_layout, pf).commit();
         } else if (id == R.id.nav_share) {
             // do a thing
             Toast.makeText(KittyActivity.this,"Clicked Share",Toast.LENGTH_SHORT).show();
