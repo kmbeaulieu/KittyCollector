@@ -114,7 +114,6 @@ public class KittyActivity extends AppCompatActivity
         //I feel like this is a really weird way to do this. Should I have generate Kitty in another class?
       //  if (gotCollar()){
             currentUser.collarsCollected++;
-        //}
         //reset status
         loveBar.setProgress(0);
         //make a new kitty
