@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "311832264309",
+    "firebase_url": "https://kitty-collector.firebaseio.com",
+    "project_id": "kitty-collector",
+    "storage_bucket": "kitty-collector.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:311832264309:android:d5663fd94f1b625b",
+        "android_client_info": {
+          "package_name": "krystleandkori.kittycollector"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "311832264309-m7jvvpkg1fpimmqr1t4ep9c2ltv7n5f9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAaNDIkQkIzVjCtnzbr_qVgFuhXldaL3AM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
