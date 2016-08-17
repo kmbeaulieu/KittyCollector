@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="C:\Users\Kori\Documents\GitHub\KittyCollector\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        revision="24.0.1"
+        sha1="b5ab8be54bc0702b0fce0636e87130c505bd05a7">
+        <dex dex="C:\Users\Kori\Documents\GitHub\KittyCollector\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_94dd67b77a22a4e6a23530e2a18668f629e267a9\classes.dex" />
+    </item>
+
+</items>
